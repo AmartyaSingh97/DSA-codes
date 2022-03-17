@@ -108,6 +108,54 @@ public class LinkedList {
         }
     }
 
+    public LinkedList.Node reverseIterative(LinkedList.Node node){
+        Node prev=null;
+        Node curr=node;
+        Node next = null;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        node=prev;
+        return node;
+    }
+
+    public LinkedList.Node reverseRecursive(LinkedList.Node node){
+        if(node==null || node.next==null){return node;}
+        LinkedList.Node newNode = reverseRecursive(node.next);
+        node.next.next=node;
+        node.next=null;
+        return newNode;
+    }
+
+    public ListNode rotateRight(ListNode head, int k) {
+        ListNode temp=head;
+        if(head==null||head.next==null){return head;}
+        int count=1;
+        while(temp.next!=null){
+            temp=temp.next;
+            count++;}
+        k=k%count;
+        temp.next=head;
+        temp=head;
+        for(int i =0;i<count-k-1;i++){
+            temp=temp.next;
+        }
+        head=temp.next;
+        temp.next=null;
+        return head;
+    }
+
+    public class ListNode {
+      int val;
+      ListNode next;
+      ListNode() {}
+      ListNode(int val) { this.val = val; }
+      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+
     private static class Node {
         private int data;
         private LinkedList.Node next;
