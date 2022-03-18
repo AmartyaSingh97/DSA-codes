@@ -10,6 +10,24 @@ public class LinkedList {
      */
     private LinkedList.Node head;
 
+    // Node classes.
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; next=null; }
+    }
+
+    private static class Node {
+        private int data;
+        private LinkedList.Node next;
+
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
     public void display() {
         for(LinkedList.Node temp = this.head; temp != null; temp = temp.next) {
             System.out.print(temp.data + "-->");
@@ -148,21 +166,19 @@ public class LinkedList {
         return head;
     }
 
-    public class ListNode {
-      int val;
-      ListNode next;
-      ListNode() {}
-      ListNode(int val) { this.val = val; }
-      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-    }
-
-    private static class Node {
-        private int data;
-        private LinkedList.Node next;
-
-        public Node(int data) {
-            this.data = data;
-            this.next = null;
+    public ListNode copy(ListNode head){
+        ListNode ans = new ListNode(0);
+        ListNode dummy=ans;
+        ListNode temp=head;
+        while(temp!=null){
+            dummy.next=new ListNode();
+            dummy=dummy.next;
+            dummy.val= temp.val;
+            dummy.next=null;
+            temp=temp.next;
         }
+        return ans.next;
     }
+
+
 }
