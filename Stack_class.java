@@ -80,6 +80,8 @@ public class Stack_class {
     // Implementation using collection framework.
     static class stack3{
         Stack<Integer> s = new Stack<>();
+        Stack<LinkedList.ListNode> st = new Stack<>();
+
     }
 
     // Push at Bottom
@@ -101,6 +103,7 @@ public class Stack_class {
         reverse(s);
         push_bottom(top,s);
     }
+
 
 
 

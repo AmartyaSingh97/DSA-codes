@@ -180,5 +180,107 @@ public class LinkedList {
         return ans.next;
     }
 
+    // Floyd's hare and turtle algorithm. Space- O(1)
+    public Boolean cycle(ListNode head){
+        ListNode fast=head;
+        ListNode slow = head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+
+            if(fast==slow){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // To get the starting point of cycle using above algo.
+    public ListNode getHead(ListNode head){
+        ListNode fast=head;
+        ListNode slow=head;
+        if(head==null){
+            return null;
+        }
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next;
+
+            if(slow==fast){
+                ListNode temp=fast;
+                slow=head;
+                while(slow!=temp){
+                    slow=slow.next;
+                    temp=temp.next;
+                }
+                return temp;
+            }
+        }
+        return null;
+    }
+
+    // Run the loop two times, in second iteration point the head of other list with pointer of first one.
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        //boundary check
+        if(headA == null || headB == null) return null;
+
+        ListNode a = headA;
+        ListNode b = headB;
+
+        //if a & b have different len, then we will stop the loop after second iteration
+        while( a != b){
+            //for the end of first iteration, we just reset the pointer to the head of another linkedlist
+            a = a == null? headB : a.next;
+            b = b == null? headA : b.next;
+        }
+
+        return a;
+    }
+
+    public ListNode swapInPair(ListNode head){
+        if(head==null || head.next==null){
+            return head;
+        }
+        ListNode prev=head.next;
+        ListNode next=head.next.next;
+        ListNode temp=head;
+        head=prev;
+        head.next=temp;
+        head.next.next=swapInPair(next);
+
+        return head;
+    }
+
+    // Bring odd indices together and even indices together in O(1) space and O(n) time.
+            public ListNode oddEvenList(ListNode head) {
+            if(head==null||head.next==null){
+                return head;}
+            ListNode odd=head,even=head.next,evenHead=even;
+            while(even!=null && even.next!=null){
+                odd.next=even.next;
+                odd=odd.next;
+                even.next=odd.next;
+                even=even.next;
+            }
+            odd.next=evenHead;
+            return head;
+        }
+
+    // Removing middle index of a list using three pointers using O(1) space complexity
+    public ListNode removeMiddle(ListNode head){
+        ListNode ans = new ListNode(-1);
+        ListNode prev=ans,slow=head,fast=head;
+        prev.next=head;
+
+        while (fast!=null && fast.next!=null ){
+            prev=slow;
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        prev.next=slow.next;
+        return ans.next;
+    }
+
+
 
 }
