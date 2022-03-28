@@ -185,7 +185,7 @@ public class Queue_class {
             return s1.peek();
         }
     }
-
+     //The poll() method of Queue Interface returns and removes the element at the front end of the container.
 
 
 }
